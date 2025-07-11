@@ -1,104 +1,145 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #2196f3;
+  --accent: #ff9800;
+  --secondary: #f5f5f5;
+  --text: #212121;
+  --bg: #fff;
+  --ttt-border: #e0e0e0;
+  --win: #ff980030;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* Minimal app background */
+.ttt-app-bg {
+  background: var(--bg);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Centered content layout */
+.ttt-center-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.ttt-game-container {
+  background: var(--secondary);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px 0 rgba(33,150,243,0.04), 0 1.5px 5px rgba(0,0,0,0.03);
+  padding: 36px 24px 24px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  min-width: 300px;
+  max-width: 95vw;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.ttt-status {
+  font-size: 1.3rem;
+  margin-bottom: 22px;
+  color: var(--primary);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  min-height: 34px;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+/* BOARD */
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  gap: 10px;
+  margin-bottom: 24px;
+  background: var(--bg);
+  border-radius: 12px;
+  border: 1px solid var(--ttt-border);
+}
+
+.ttt-square {
+  width: 64px;
+  height: 64px;
+  background: var(--bg);
+  border: 2px solid var(--primary);
+  border-radius: 9px;
+  font-size: 2rem;
+  color: var(--accent);
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.16s, box-shadow 0.16s, color 0.16s;
+}
+.ttt-square:focus {
+  box-shadow: 0 0 0 2px var(--primary)66;
+}
+.ttt-square:hover:not(:disabled) {
+  background: var(--primary)08;
+  color: var(--primary);
+}
+.ttt-square:disabled {
+  background: var(--secondary);
+  color: var(--primary)88;
+  cursor: default;
+}
+
+/* RESET BUTTON */
+.ttt-reset-btn {
+  display: block;
+  margin: 0 auto 12px auto;
+  margin-top: 4px;
+  padding: 0.58em 1.7em;
+  font-size: 1em;
+  background: var(--primary);
+  color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: inherit;
+  font-weight: 500;
+  box-shadow: 0 1.5px 5px rgba(0,0,0,0.04);
+  transition: background 0.14s, color 0.16s;
+}
+.ttt-reset-btn:hover, .ttt-reset-btn:focus {
+  background: var(--accent);
+  color: #fff;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.ttt-footer {
+  padding: 18px 0 8px 0;
+  color: #828282;
+  font-size: 13px;
+  text-align: center;
+  letter-spacing: 0.01em;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.ttt-link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ttt-link:hover, .ttt-link:focus {
+  color: var(--accent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive design */
+@media (max-width: 480px) {
+  .ttt-board {
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(3, 44px);
+    gap: 6px;
   }
-  to {
-    transform: rotate(360deg);
+  .ttt-square {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    border-radius: 7px;
   }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .ttt-game-container {
+    padding: 16px 4px 12px 4px;
+    min-width: 190px;
   }
 }
